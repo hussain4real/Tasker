@@ -1,4 +1,18 @@
-<mat-card class="item" *ngIf="task" (dblclick)="edit.emit(task)">
+<mat-card class="item mb-4 cursor-pointer" *ngIf="task" (dblclick)="edit.emit(task)">
+    <mat-card-header>
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title>Shiba Inu</mat-card-title>
+        <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image [src]="task.image_url" alt="Photo of a Shiba Inu">
     <h2>{{task.title}}</h2>
     <p>{{task.description}}</p>
+    <mat-card-actions class="flex justify-between">
+        <button mat-icon-button (click)="onEdit()">
+            <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button color="warn" (click)="deleteTask()">
+            <mat-icon>delete</mat-icon>
+        </button>
+    </mat-card-actions>
 </mat-card>

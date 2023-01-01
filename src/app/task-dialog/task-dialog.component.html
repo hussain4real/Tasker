@@ -1,0 +1,20 @@
+<div class="p-4">
+
+    <div class="flex flex-col sm:flex-row space-x-4">
+
+        <mat-form-field>
+            <mat-label>Title</mat-label>
+            <input matInput cdkFocusInitial [(ngModel)]="data.task.title" />
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Description</mat-label>
+            <textarea matInput [(ngModel)]="data.task.description"></textarea>
+        </mat-form-field>
+    </div>
+
+    <div mat-dialog-actions>
+        <button mat-button [mat-dialog-close]="{ task: data.task }">OK</button>
+        <button mat-button (click)="cancel()">Cancel</button>
+    </div>
+</div>

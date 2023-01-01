@@ -2,15 +2,28 @@
     <mat-icon>local_fire_department</mat-icon>
     <span>Tasker</span>
 </mat-toolbar>
-<div class="content-wrapper p-4">
-    <div class="container-wrapper">
+<div class="container mx-auto relative">
+    <div class="fixed bottom-2 right-2 z-50">
+
+        <button (click)="newTask()" mat-fab color="primary">
+            <mat-icon>plus_one</mat-icon>
+        </button>
+    </div>
+    <div class="container-wrapper grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
         <div class="container">
             <h2>Backlog</h2>
 
             <mat-card cdkDropList id="todo" #todoList="cdkDropList" [cdkDropListData]="todo"
                 [cdkDropListConnectedTo]="[doneList, inProgressList]" (cdkDropListDropped)="drop($event)" class="list">
-                <p class="empty-label" *ngIf="todo.length === 0">Empty list</p>
-                <app-task (edit)="editTask('todo', $event)" *ngFor="let task of todo" cdkDrag [task]="task"></app-task>
+
+                <mat-card-content>
+
+                    <p class="empty-label" *ngIf="todo.length === 0">Empty list</p>
+                    <app-task class="text-indigo-400" (edit)="editTask('todo', $event)"
+                        (delete)="deleteTask('todo', $event)" *ngFor="let task of todo" cdkDrag [task]="task">
+                    </app-task>
+                </mat-card-content>
+
             </mat-card>
         </div>
 
