@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "tasker-cc0b9": {
+      "hosting": {
+        "Tasker": [
+          "tasker-cc0b9"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "tasker-cc0b9"
+  }
+}

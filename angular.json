@@ -93,6 +93,16 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "prerender": false,
+            "ssr": false,
+            "browserTarget": "Tasker:build:production",
+            "firebaseProject": "tasker-cc0b9",
+            "firebaseHostingSite": "tasker-cc0b9"
+          }
         }
       }
     }
