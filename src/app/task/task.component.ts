@@ -10,6 +10,7 @@ import { Task } from './task';
 export class TaskComponent {
   @Input() task: Task | null = null;
   @Output() edit = new EventEmitter<Task>();
+  @Output() toggle = new EventEmitter<Task>();
   // @Output() delete = new EventEmitter<Task>();
   @Output() delete = new EventEmitter<Task>();
 
@@ -20,6 +21,15 @@ export class TaskComponent {
     }
     console.log('hello');
     this.edit.emit(this.task);
+  }
+
+  //send the toggle status to the parent component
+  onToggle(): void {
+    if (!this.task) {
+      return;
+    }
+
+    this.toggle.emit(this.task);
   }
 
   //method to delete the task

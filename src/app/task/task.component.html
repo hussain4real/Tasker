@@ -8,9 +8,13 @@
     <h2>{{task.title}}</h2>
     <p>{{task.description}}</p>
     <mat-card-actions class="flex justify-between">
-        <button mat-icon-button (click)="onEdit()">
-            <mat-icon>edit</mat-icon>
-        </button>
+
+        <mat-chip-listbox aria-label="Fish selection" (click)="toggle.emit()">
+            <mat-chip-option *ngIf="task.status === 'todo'">todo</mat-chip-option>
+            <mat-chip-option *ngIf="task.status === 'inProgress'">in progress</mat-chip-option>
+            <mat-chip-option *ngIf="task.status === 'done'" selected>done</mat-chip-option>
+
+        </mat-chip-listbox>
         <button mat-icon-button color="warn" (click)="deleteTask()">
             <mat-icon>delete</mat-icon>
         </button>

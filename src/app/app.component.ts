@@ -91,19 +91,22 @@ export class AppComponent {
 
   toggleStatus(task: Task) {
     console.log(task.status);
-    switch (task.status) {
-      case 'todo':
-        task.status = 'inProgress';
-        break;
-      case 'in progress':
-        task.status = 'done';
-        break;
-      case 'done':
-        task.status = 'todo';
-        break;
-    }
-    console.log(task.status);
-    this.store.collection('tasks').doc(task.id).update(task);
+    setTimeout(() => {
+      switch (task.status) {
+        case 'todo':
+          task.status = 'inProgress';
+          break;
+        case 'inProgress':
+          task.status = 'done';
+          break;
+        case 'done':
+          task.status = 'todo';
+          break;
+      }
+      console.log(task.status);
+      this.store.collection('tasks').doc(task.id).update(task);
+    }, 1000);
+
     console.log(task.status);
   }
 }
