@@ -19,7 +19,8 @@
 
                     <p class="empty-label" *ngIf="!todoTasks">Empty list</p>
 
-                    <app-task class="text-indigo-400" *ngFor="let task of todoTasks | async" [task]="task">
+                    <app-task class="text-indigo-400" *ngFor="let task of todoTasks | async" [task]="task"
+                        (edit)="editTask($event)" (delete)="deleteTask(task)">
                     </app-task>
 
                 </mat-card-content>
@@ -31,8 +32,9 @@
             <h2>In progress</h2>
 
             <mat-card class="list">
-                <p class="empty-label">Empty list</p>
-                <app-task *ngFor="let task of inProgressTasks | async" [task]="task"></app-task>
+                <p class="empty-label" *ngIf="!inProgressTasks">Empty list</p>
+                <app-task *ngFor="let task of inProgressTasks | async" [task]="task" (edit)="editTask($event)"
+                    (delete)="deleteTask(task)"></app-task>
             </mat-card>
         </div>
 
@@ -41,7 +43,8 @@
 
             <mat-card class="list">
                 <p class="empty-label">Empty list</p>
-                <app-task *ngFor="let task of doneTasks | async" [task]="task"></app-task>
+                <app-task *ngFor="let task of doneTasks | async" [task]="task" (edit)="editTask($event)"
+                    (delete)="deleteTask(task)"></app-task>
             </mat-card>
         </div>
     </div>
