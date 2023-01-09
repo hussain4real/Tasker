@@ -10,7 +10,7 @@
     <mat-card-actions class="flex justify-between">
 
         <mat-chip-listbox aria-label="Fish selection" (click)="toggle.emit()">
-            <mat-chip-option *ngIf="task.status === 'todo'">todo</mat-chip-option>
+            <mat-chip-option color="accent" *ngIf="task.status === 'todo'">todo</mat-chip-option>
             <mat-chip-option *ngIf="task.status === 'inProgress'">in progress</mat-chip-option>
             <mat-chip-option *ngIf="task.status === 'done'" selected>done</mat-chip-option>
 

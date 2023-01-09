@@ -5,8 +5,19 @@ import {
 import { Component } from '@angular/core';
 import { createTask, Task } from './task/task';
 import { MatDialog } from '@angular/material/dialog';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { Observable } from 'rxjs';
+import {
+  AngularFirestore,
+  AngularFirestoreCollection,
+} from '@angular/fire/compat/firestore';
+import { BehaviorSubject, Observable } from 'rxjs';
+
+const getObservable = (collection: AngularFirestoreCollection<Task>) => {
+  const subject = new BehaviorSubject<Task[]>([]);
+  collection.valueChanges({ idField: 'id' }).subscribe((val: Task[]) => {
+    subject.next(val);
+  });
+  return subject;
+};
 
 @Component({
   selector: 'app-root',
@@ -19,17 +30,21 @@ export class AppComponent {
   doneTasks: Observable<Task[]>;
 
   constructor(private dialog: MatDialog, private store: AngularFirestore) {
-    this.todoTasks = this.store
-      .collection<Task>('tasks', (ref) => ref.where('status', '==', 'todo'))
-      .valueChanges({ idField: 'id' });
-    this.inProgressTasks = this.store
-      .collection<Task>('tasks', (ref) =>
+    this.todoTasks = getObservable(
+      this.store.collection<Task>('tasks', (ref) =>
+        ref.where('status', '==', 'todo')
+      )
+    ) as Observable<Task[]>;
+    this.inProgressTasks = getObservable(
+      this.store.collection<Task>('tasks', (ref) =>
         ref.where('status', '==', 'inProgress')
       )
-      .valueChanges({ idField: 'id' });
-    this.doneTasks = this.store
-      .collection<Task>('tasks', (ref) => ref.where('status', '==', 'done'))
-      .valueChanges({ idField: 'id' });
+    ) as Observable<Task[]>;
+    this.doneTasks = getObservable(
+      this.store.collection<Task>('tasks', (ref) =>
+        ref.where('status', '==', 'done')
+      )
+    ) as Observable<Task[]>;
   }
 
   newTask(): void {
